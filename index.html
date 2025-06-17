@@ -36,27 +36,27 @@
             </div>
             
             <div class="weather-details">
-                <div class="detail-card">
+                <div class="detail-card" id="uv-card">
                     <h3>UV Index</h3>
                     <p>--</p>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card" id="humidity-card">
                     <h3>Humidity</h3>
                     <p>--%</p>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card" id="visibility-card">
                     <h3>Visibility</h3>
                     <p>-- km</p>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card" id="feel-card">
                     <h3>Feels Like</h3>
                     <p>--°</p>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card" id="sunrise-card">
                     <h3>Sunrise</h3>
                     <p>--:--</p>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card" id="sunset-card">
                     <h3>Sunset</h3>
                     <p>--:--</p>
                 </div>
@@ -65,8 +65,10 @@
 
         <div class="weather-sidebar">
             <div class="weather-overview">
-                <h2>Weather Overview</h2>
-                <p class="weather-description">--</p>
+                <h2>Weather Overview (24Hrs)</h2>
+                <div class="weather-overview-cards-container">
+                    <!-- Overview items will be added dynamically -->
+                </div>
             </div>
             
             <div class="forecast">
@@ -77,8 +79,6 @@
             </div>
         </div>
     </div>
-
-    <script src="env.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

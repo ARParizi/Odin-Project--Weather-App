@@ -226,10 +226,31 @@ html, body {
   color: #333;
 }
 
-.weather-description {
-  font-size: 1.1rem;
-  color: #666;
-  margin: 0;
+.weather-overview-cards-container {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #007bff #f0f0f0;
+}
+
+.weather-overview-cards-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.weather-overview-cards-container::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.weather-overview-cards-container::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 4px;
+}
+
+.weather-overview-cards-container::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3;
 }
 
 .forecast {
