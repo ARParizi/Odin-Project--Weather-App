@@ -8,6 +8,26 @@ let currentUnit = 'metric'; // Default to Celsius
 let currentUnitString = '°C';
 let currentUnitDistance = 'km';
 
+// Function to show loading screen
+function showLoading() {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = 'loading-screen';
+    loadingDiv.innerHTML = `
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading weather data...</p>
+        </div>
+    `;
+    document.body.appendChild(loadingDiv);
+}
+
+// Function to hide loading screen
+function hideLoading() {
+    const loadingDiv = document.getElementById('loading-screen');
+    if (loadingDiv) {
+        loadingDiv.remove();
+    }
+}
 
 //window.setInterval(handleSearch, 15 * 60 * 1000);
 // Function to handle the search
@@ -18,6 +38,9 @@ async function handleSearch() {
         alert('Please enter a city name');
         return;
     }
+
+    // Show loading screen
+    showLoading();
 
     try {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${currentUnit}&key=3AWSCAXB72MWJZ7T3YBJFDL9T&contentType=json`);
@@ -136,6 +159,9 @@ async function handleSearch() {
     } catch (error) {
         console.error(error);
         alert(error.message);
+    } finally {
+        // Hide loading screen
+        hideLoading();
     }
 }
 
