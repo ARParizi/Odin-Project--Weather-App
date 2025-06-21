@@ -9,7 +9,7 @@ let currentUnitString = '°C';
 let currentUnitDistance = 'km';
 
 
-window.setInterval(handleSearch, 15 * 60 * 1000);
+//window.setInterval(handleSearch, 15 * 60 * 1000);
 // Function to handle the search
 async function handleSearch() {
     const city = searchInput.value.trim();
@@ -101,6 +101,36 @@ async function handleSearch() {
             `;
             
             weatherOverviewContainer.appendChild(cardDiv);
+        }
+
+        // Populate 5-day forecast
+        const forecastContainer = document.querySelector('.forecast-container');
+        forecastContainer.innerHTML = ''; // Clear existing content
+        
+        for (let i = 1; i <= 5; i++) {
+            const day = data.days[i];
+            
+            // Create forecast card div
+            const forecastCard = document.createElement('div');
+            forecastCard.className = 'forecast-card';
+            
+            // Get day name (tomorrow, day after tomorrow, etc.)
+            const dayNames = ['Tomorrow', '2 days from now', '3 days from now', '4 days from now', '5 days from now'];
+            const dayName = dayNames[i - 1];
+            
+            // Create card content
+            forecastCard.innerHTML = `
+                <div class="day">${dayName}</div>
+                <div class="icon">
+                    <img src="icons/${day.icon}.svg" alt="${day.icon}">
+                </div>
+                <div class="temperature">
+                    <span class="current">${day.temp}${currentUnitString}</span>
+                    <span class="range">${day.tempmin}${currentUnitString} / ${day.tempmax}${currentUnitString}</span>
+                </div>
+            `;
+            
+            forecastContainer.appendChild(forecastCard);
         }
 
     } catch (error) {
