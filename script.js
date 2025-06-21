@@ -66,6 +66,43 @@ async function handleSearch() {
 
         const sunset = document.querySelector('#sunset-card p');
         sunset.textContent = data.currentConditions.sunset;
+
+        // Populate 24-hour weather overview
+        const weatherOverviewContainer = document.querySelector('.weather-overview-cards-container');
+        weatherOverviewContainer.innerHTML = '';
+        
+        for (let i = 0; i < data.days[0].hours.length; i++) {
+            const hour = data.days[0].hours[i];
+            
+            // Only generate card if this hour is in the future
+            if (hour.datetimeEpoch <= data.currentConditions.datetimeEpoch) {
+                continue;
+            }
+            
+            // Create card div
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'weather-overview-card';
+            
+            // Extract time am/pm
+            let time;
+            let hour24 = parseInt(hour.datetime.split(':')[0]);
+            let ampm = hour24 >= 12 ? 'PM' : 'AM';
+            let hour12 = hour24 % 12;
+            if (hour12 === 0) hour12 = 12;
+            time = `${hour12}${ampm}`;
+            
+            // Create card content
+            cardDiv.innerHTML = `
+                <div class="time">${time}</div>
+                <div class="icon">
+                    <img src="icons/${hour.icon}.svg" alt="${hour.icon}">
+                </div>
+                <div class="temperature">${hour.temp}${currentUnitString}</div>
+            `;
+            
+            weatherOverviewContainer.appendChild(cardDiv);
+        }
+
     } catch (error) {
         console.error(error);
         alert(error.message);
